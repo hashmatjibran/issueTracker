@@ -1,0 +1,28 @@
+{
+  "name": "issuetracker",
+  "version": "1.0.0",
+  "description": "issue Tracker",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hashmatjibran/issueTracker.git"
+  },
+  "author": "Hashmat Jibran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hashmatjibran/issueTracker/issues"
+  },
+  "homepage": "https://github.com/hashmatjibran/issueTracker#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.1.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1",
+    "mongodb": "^5.5.0",
+    "mongoose": "^7.2.2"
+  }
+}
