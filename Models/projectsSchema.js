@@ -11,7 +11,13 @@ const projectsSchema = mongoose.Schema({
     author :{
         required:true,
         type:String
-    }
+    },
+    issues:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'issues'
+        }
+    ]
 });
 
 const projects = mongoose.model('projects',projectsSchema);

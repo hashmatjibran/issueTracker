@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/projectDescription.css">
+</head>
+<body>
+    <div class="projectDetails">
+        <h1>
+            <%=project.name%>  
+        </h1>
+        <h4>
+            <%=project.description%>
+        </h4>
+        <small>
+            <%=project.author%>
+        </small>
+    </div>
+    
+    <!-- creating  div for filter options -->
+
+    <div class="filterOptsDiv ps-3 pt-3">
+
+        <div class="input-group mb-3 searchByTitle">
+          <span class="input-group-text" id="basic-addon3"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input type="text" id="myInput" onkeyup="filterFunction()" placeholder="filter issues by title">
+        </div>
+
+        <!-- dropdown for sortBy -->
+        <div class="dropdown me-3">
+          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            Asc/desc
+          </a>
+        
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><button class="dropdown-item" onclick="sortTable(0)">By Title</button></li>
+            <li><button class="dropdown-item" onclick="sortTable(1)">By Description</button></li>
+          </ul>
+        </div>
+
+        <!-- dropdown for filterBY -->
+        <div class="dropdown me-3">
+          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            Filter By
+          </a>
+        
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#authorModal">
+              Author
+            </button></li>
+            <li><a class="dropdown-item" href="#">Oldest</a></li>
+          </ul>
+        </div>
+        
+    </div>
+
+
+    <!-- creating a div to show multiple issues -->
+  <div class="issuesDiv">
+      <%if(project.issues.length ==0){%>
+
+        <li class="issueList">
+
+          <h5>no issue's in this project , want to create an issue click on 
+            <code>
+              Create An Issue
+            </code>
+          </h5>
+
+        </li>
+
+      <%}else{%>
+
+          <!-- showing the data in a tabulated structure -->
+
+    <table id="myTable">
+        <tr class="header">
+            <th style="width:30%;" onclick="sortTable(0)"> Title <small>(author)</small></th>
+            <th style="width:50%;" onclick="sortTable(1)"> Description</th>
+            <th style="width:20%">Action</th>
+        </tr>
+      
+        <%for(issue of project.issues){%>
+          
+            <tr>
+
+                <td><%= issue.title%> <small>(<%=issue.author%>)</small> </td>
+                <td><%= issue.description%></td>
+                <td><button class="btn btn-success" onclick="resolveBtn()">Resolve</button></td>
+
+            </tr>
+
+        <%}}%>
+    </table>
+  </div>
+
+
+
+    <!-- Using Bootstrap Modal to take user input i.e when creating a new issue-->
+
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+          <!-- here is the form that receives the user input -->
+         <form action="/issues/createIssue/<%=project._id%>" method="post">
+
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon3">Issue Title</span>
+              <input type="text" class="form-control" id="basic-url" name="title" aria-describedby="basic-addon3" required>
+            </div>
+            
+            <div class="input-group mb-3">
+              <span class="input-group-text">Description</span>
+              <textarea class="form-control" aria-label="With textarea" name="description" required></textarea>
+            </div>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">@</span>
+              <input type="text" class="form-control" placeholder="author" aria-label="author" name="author" aria-describedby="basic-addon1" required>
+            </div>
+
+            <!-- creating buttons to close and save form data -->
+          </div>
+          <div class="modal-footer">
+            <button id="closeBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button  type="submit" class="btn btn-primary" >Save</button>
+          </div>
+
+      </form>
+      <!-- form ends here -->
+      </div>
+    </div>
+  </div>
+
+   <!-- Button used to trigger modal -->
+   
+  <button id="createIssueBtn" type="button" class="btn btn-primary mx-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+   create an issue
+  </button>
+
+
+  <!-- modal for receiving author name -->
+
+<div class="modal fade" id="authorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!--  -->
+        <form >
+
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon3">Author</span>
+            <input type="text" class="form-control" id="authorValue" name="author" aria-describedby="basic-addon3" required placeholder="Author's name">
+          </div>
+          </form>
+        <!--  -->
+      </div>
+      <div class="modal-footer">
+        <button id="filterByAuthorBtnClose" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button id="filterByAuthorBtn" type="submit" data-projectId="<%=project._id%>" onclick="filterByAuthor(event)"  class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+
+
+
+  <!-- javascript file included here -->
+  <script src="/js/projects.js"></script>
+
+</body>
+</html>
+
+

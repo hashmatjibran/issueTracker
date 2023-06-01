@@ -32,8 +32,29 @@ text-transform: capitalize;
 padding: 1%;
 }
 
-/* css for displayng the list */
-
-.list{
-    list-style:decimal-leading-zero;
+/* css for list items i.e li tags in list */
+.list >li{
+    background-color: #a7a2a28a;
+    margin-right: 1%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1%;
+    font-size: 1.5rem;
+    
 }
+
+/* css for the div that is showing list of all projects */
+
+.showProjectsDiv{
+    width: 70%;
+    display: inline-block;
+    border-right: 1px solid orange;
+    text-align: center;
+}
+
+/* css for the add projects btn */
+
+#addProjectBtn{
+    position: absolute;
+}
+
