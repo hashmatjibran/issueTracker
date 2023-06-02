@@ -1,31 +1,4 @@
 
-/* css for the whole nav bar */
-.navbar{
-    background: #d3d3d357;
-    display: flex;
-    align-items: center;
-    height: 10.5vh;
-    margin: auto;
-    padding-left: 1%;
-    padding-right: 1%;
-    overflow: hidden;
-    margin-bottom: 1%;
-    margin-top: 1%;
-}
-
-/* css for the div containing navbar image */
-.navImageDiv{
-    display: flex;
-    width: 12%;
-    position: absolute;
-    height: 75%;
-}
-
-/* css for the image in the navbar */
-.navImage{
-    width: 50%;
-}
-
 /* css for the name of project which is displayed in the projects.ejs file */
 .projectName{
 text-transform: capitalize;
