@@ -1,0 +1,37 @@
+    <!-- creating a div to show multiple issues -->
+    <div class="issuesDiv">
+        <%if(project.issues.length ==0){%>
+  
+          <li class="issueList">
+  
+            <h5>no issue's in this project , want to create an issue click on 
+              <code>
+                Create An Issue
+              </code>
+            </h5>
+  
+          </li>
+  
+        <%}else{%>
+  
+            <!-- showing the data in a tabulated structure -->
+  
+      <table id="myTable">
+          <tr class="header">
+              <th style="width:30%;" onclick="sortTable(0)"> Title <small>(author)</small></th>
+              <th style="width:50%;" onclick="sortTable(1)"> Description</th>
+             
+          </tr>
+        
+          <%for(issue of project.issues){%>
+            
+              <tr>
+  
+                  <td class="titletd"><%= issue.title%> <small>(<%=issue.author%>)</small> </td>
+                  <td><%= issue.description%></td>
+  
+              </tr>
+  
+          <%}}%>
+      </table>
+    </div>

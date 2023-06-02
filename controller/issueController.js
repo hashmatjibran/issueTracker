@@ -4,17 +4,23 @@ const projectSchema = require('../Models/projectsSchema');
 module.exports.createIssue = async (request , response)=>{
     
     try {
+
+        let lableArr = request.body.labels.split(',');
+        console.log(lableArr);
         // check whether the project exists or not
         const project = await projectSchema.findById(request.params.projectId);
 
         // if project is found then create the issue and store the issue id in the project as well
+
         if(project)
         { 
             // creating the issue 
             const issue = await issueSchema.create({
                 author: request.body.author.toLowerCase(),
                 description: request.body.description,
-                title: request.body.title
+                title: request.body.title,
+                labels: lableArr,
+                projectId:request.params.projectId
             });
             
             // storing the issue in the specified project 
@@ -50,15 +56,15 @@ module.exports.filterByAuthor = async (request , response)=>{
             // converting the user input to lower case
             let author = request.body.author.toLowerCase();
             
-            const project = await projectSchema
-            .findById(request.body.projectId)
-            .populate('issues');
+            const project = await projectSchema.findById(request.body.projectId);
+            
 
+        
             if(project){
-                // filtering the issues and storing the filtered result in newIssues
-                newIssues = project.issues.filter((issue)=>{
-                    return issue.author == author;
-                });;  
+
+                newIssues = await issueSchema.find({ "projectId": request.body.projectId, 'author':author });
+
+                // .find( { tags: ["red", "blank"] } )
             }
           
        
@@ -71,4 +77,30 @@ module.exports.filterByAuthor = async (request , response)=>{
     } catch (error) {
         console.log('error in resolving the issue',error);
     }
+}
+
+
+module.exports.filter = async (request , response)=>{
+
+    let lableArr = request.body.labels.split(',');
+        console.log(lableArr);
+        console.log(request.body.projectId)
+
+    let newIssues = [];
+        const project = await projectSchema.findById(request.body.projectId);
+            
+        
+
+        
+        if(project){
+
+            newIssues = await issueSchema
+            .find({ "projectId": request.body.projectId, "labels":{ $all: lableArr} });
+
+            console.log(newIssues)
+            // .find( { tags: ["red", "blank"] } )
+        }
+
+        return response.status(200).json(newIssues);
+
 }

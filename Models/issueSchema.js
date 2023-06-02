@@ -13,9 +13,13 @@ const issueSchema = mongoose.Schema({
         type:String,
         require:true
     },
-    resolved:{
-        type:Boolean,
-        default:false
+    labels:[{
+        type:String
+    }],
+    projectId:{
+        type:mongoose.Schema.Types.ObjectId,
+        require:true,
+        ref:'projects'
     }
 
 },

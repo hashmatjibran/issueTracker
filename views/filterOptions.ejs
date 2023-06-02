@@ -1,0 +1,37 @@
+    <!-- creating  div for filter options -->
+
+    <div class="filterOptsDiv ps-3 pt-3">
+
+        <div class="input-group mb-3 searchByTitle">
+          <span class="input-group-text" id="basic-addon3"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input type="text" id="myInput" onkeyup="filterFunction()" placeholder="filter issues by title">
+        </div>
+
+        <!-- dropdown for sortBy -->
+        <div class="dropdown me-3 mb-3">
+          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            Asc/desc
+          </a>
+        
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><button class="dropdown-item" onclick="sortTable(0)">By Title</button></li>
+            <li><button class="dropdown-item" onclick="sortTable(1)">By Description</button></li>
+          </ul>
+        </div>
+
+        <!-- dropdown for filterBY -->
+        <div class="dropdown me-3 mb-3">
+          <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#authorModal">
+             Filter By Author
+            </button>
+        </div>
+
+        <!-- code for filter by label -->
+        
+        <div class="input-group mb-3 filterByLabel">
+          <span class="input-group-text" id="basic-addon3"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input type="text" id="filterByLabelInput" onkeyup="filterByLabelFunction()" multiple placeholder="Separate multiple labels by a , eg open,unresolved">
+          <button onclick="filterByLabel(event)" data-projectId="<%=project._id%>" class="btn btn-success">Apply</button>
+        </div>
+
+    </div>

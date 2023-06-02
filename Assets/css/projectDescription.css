@@ -1,3 +1,55 @@
+/* media query for responsiveness */
+@media only screen and (min-width: 1180px) {
+  .filterOptsDiv {
+    border: 1px solid black;
+    width: 80%;
+    margin: auto;
+    border-radius: 6px;
+    display: flex;
+    align-items: baseline;
+  }
+  .searchByTitle{
+    width: 35%;
+  }
+
+  .filterByLabel{
+    width:40%;
+  }
+
+  /* css for create issue btn i.e New Issue */
+#createIssueBtn{
+  position: absolute;
+  left: 80%;  
+  margin-top: 1%;
+}
+
+}
+
+
+@media only screen and (max-width: 1180px) {
+  .filterOptsDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .searchByTitle , .filterByLabel{
+    width: 100%;
+  }
+
+  #createIssueBtn{
+    position: absolute;
+    left: 50%;
+    margin-top: 1%;
+  }
+  
+}
+
+
+
+
+
+
+/* css for showing the project details like capitalizing the data */
 .projectDetails{
     text-transform: capitalize;
     text-align: center;
@@ -5,20 +57,8 @@
 
 }
 
-/*  */
 
-.filterOptsDiv{
-    border: 1px solid black;
-    width: 80%;
-    margin: auto;
-    border-radius: 6px;
-    display: flex;
-    align-items: baseline;
-    
-    
-}
-
-/*  */
+/* css for the div which will be showing issues */
 
 .issuesDiv{
     width: 80%;
@@ -28,28 +68,18 @@
 }
 
 
-/* css for create issue btn */
-#createIssueBtn{
-    position: absolute;
-    top: 19%;
+
+
+/* css for search bar i.e search issues by title */
+#myInput{
+  width: 85%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
 }
 
-/* css for search bar div */
-.searchByTitle{
-   width: 35%;
-}
+/* css for table displaying various issues with their title and ddescription*/
 
-/* table css */
-
-#myInput {
-    
-    width: 85%; /* Full-width */
-    font-size: 16px; /* Increase font-size */
-    padding: 12px 20px 12px 40px; /* Add some padding */
-    border: 1px solid #ddd; /* Add a grey border */
-    
-  }
-  
   #myTable {
     border-collapse: collapse; /* Collapse borders */
     width: 100%; /* Full-width */
@@ -71,3 +101,19 @@
     /* Add a grey background color to the table header and on hover */
     background-color: #f1f1f1;
   }
+
+  /* separating the title and description in the table */
+  .titletd{
+    border-right: 1px solid;
+  }
+
+  /* css for filter by lable i.e where we will be filtering the data by label*/
+
+  #filterByLabelInput{
+    width: 70%;
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+  }
+
+ 

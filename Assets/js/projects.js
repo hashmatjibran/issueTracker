@@ -59,9 +59,8 @@ function filterFunction() {
             tableData.empty();
             let data =
             `<tr class="header">
-                <th style="width:30%;" onclick="sortTable(0)"> Title <small>(author)</small></th>
+                <th style="width:30%;" onclick="sortTable(0)" class="titletd"> Title <small>(author)</small></th>
                 <th style="width:50%;" onclick="sortTable(1)"> Description</th>
-                <th style="width:20%">Action</th>
             </tr>` ;
 
         for(issue of response){
@@ -69,7 +68,7 @@ function filterFunction() {
                     `<tr>
                         <td> ${issue.title} <small>(${issue.author})</small></td>
                         <td> ${issue.description}</td>
-                        <td><button class="btn btn-success" onclick="resolveBtn()">Resolve</button></td>
+                        
                     </tr>`;
         }
         // writing new data to the table
@@ -143,3 +142,39 @@ function sortTable(n) {
       }
     }
   }
+
+
+  function filterByLabel(e) { 
+    const labels = $('#filterByLabelInput').val();
+    const projectId = e.target.dataset.projectid;
+
+    $.ajax({
+      type: "post",
+      url: "/issues/filterbylabels",
+      data: {
+        projectId,
+        labels
+      },
+      success: function (response) {
+        let tableData = $('#myTable');
+        tableData.empty();
+        let data =
+        `<tr class="header">
+            <th style="width:30%;" onclick="sortTable(0)" class="titletd"> Title <small>(author)</small></th>
+            <th style="width:50%;" onclick="sortTable(1)"> Description</th>
+        </tr>` ;
+
+    for(issue of response){
+        data +=
+                `<tr>
+                    <td> ${issue.title} <small>(${issue.author})</small></td>
+                    <td> ${issue.description}</td>
+                </tr>`;
+    }
+    // writing new data to the table
+    tableData.html(data);
+
+      }
+    });
+
+   }
