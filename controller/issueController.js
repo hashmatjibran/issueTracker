@@ -5,7 +5,9 @@ module.exports.createIssue = async (request , response)=>{
     
     try {
 
-        let lableArr = request.body.labels.split(',');
+        let lableArr = request.body.labels.filter((label)=>{
+            return label.toLowerCase();
+        });
         console.log(lableArr);
         // check whether the project exists or not
         const project = await projectSchema.findById(request.params.projectId);
@@ -82,7 +84,7 @@ module.exports.filterByAuthor = async (request , response)=>{
 
 module.exports.filter = async (request , response)=>{
 
-    let lableArr = request.body.labels.split(',');
+    let lableArr = request.body.labels;
         console.log(lableArr);
         console.log(request.body.projectId)
 

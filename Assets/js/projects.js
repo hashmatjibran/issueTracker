@@ -1,3 +1,11 @@
+
+$("#filterByLabelInput").select2({
+  tags: true,
+  tokenSeparators: [',', ' '],
+  width:'resolve',
+})
+ 
+ 
  addProject = ()=>{
     console.log('btn clicked');
 
@@ -146,6 +154,11 @@ function sortTable(n) {
 
   function filterByLabel(e) { 
     const labels = $('#filterByLabelInput').val();
+
+    const newLabels = labels.filter((label)=>{
+      return label.toLowerCase();
+    });
+    console.log(labels)
     const projectId = e.target.dataset.projectid;
 
     $.ajax({
@@ -153,7 +166,7 @@ function sortTable(n) {
       url: "/issues/filterbylabels",
       data: {
         projectId,
-        labels
+        newLabels
       },
       success: function (response) {
         let tableData = $('#myTable');
@@ -178,3 +191,17 @@ function sortTable(n) {
     });
 
    }
+
+   ///////////////
+   //select2 js
+
+
+   $(".js-select2").select2({
+    placeholder : "Assign a lable",
+    tokenSeparators: [',', ' '],
+    tags: true, // создает новые опции на лету
+    allowClear: true,
+    dropdownParent: $("#staticBackdrop"),
+    width:'resolve'
+  });
+

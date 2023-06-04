@@ -12,10 +12,6 @@
     width: 35%;
   }
 
-  .filterByLabel{
-    width:40%;
-  }
-
   /* css for create issue btn i.e New Issue */
 #createIssueBtn{
   position: absolute;
@@ -32,8 +28,9 @@
     flex-direction: column;
     justify-content: space-between;
   }
-  .searchByTitle , .filterByLabel{
+  .searchByTitle {
     width: 100%;
+   
   }
 
   #createIssueBtn{
@@ -110,10 +107,20 @@
   /* css for filter by lable i.e where we will be filtering the data by label*/
 
   #filterByLabelInput{
-    width: 70%;
+    width: 80%;
     font-size: 16px; /* Increase font-size */
-    padding: 12px 20px 12px 40px; /* Add some padding */
+ 
     border: 1px solid #ddd; /* Add a grey border */
   }
-
+  
+  .filterByLabel{
+     position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
  
+
+  .select2.select2-container.select2-container--default{
+    /* width: 100%; */
+  }

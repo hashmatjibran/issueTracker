@@ -1,6 +1,8 @@
+
+    
     <!-- Using Bootstrap Modal to take user input i.e when creating a new issue-->
 
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -23,19 +25,36 @@
                   <span class="input-group-text">Description</span>
                   <textarea class="form-control" aria-label="With textarea" name="description" required></textarea>
                 </div>
-    
+                
+                  <!-- filling author for issue -->
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                    <input type="text" class="form-control" placeholder="author" aria-label="author" name="author" aria-describedby="basic-addon1" required>
+                  </div>
+      
+
                 <!-- selecting labels for issues -->
-                <div class="input-group mb-3">
-                  <span class="input-group-text">Labels</span>
-                  <input type="text" class="form-control" id="basic-url" name="labels" aria-describedby="basic-addon3" multiple required placeholder="Enter labels separated by , eg open,resolved">
-                </div>
+                
+                 
+                 
+                  <div class="input-group mb-3 filterByLabel">
+                     <span class="input-group-text" id="basic-addon3">Labels</span>
+                  <!--  -->
+                  <select class="js-select2 form-control " style="width:80%" multiple="multiple">
+                      <option selected="selected">orange</option>
+                      <% for(label of labels){%>
+                        <option value="<%=label%>"><%=label%></option>
+                        <%}%>
+                      
+                    </select>
+                  </div>
+
+                  
+                  
+                  <!-- <input type="text" class="form-control" id="basic-url" name="labels" aria-describedby="basic-addon3" multiple required placeholder="Enter labels separated by , eg open,resolved"> -->
+                
     
-                <!-- filling author for issue -->
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">@</span>
-                  <input type="text" class="form-control" placeholder="author" aria-label="author" name="author" aria-describedby="basic-addon1" required>
-                </div>
-    
+              
                 <!-- creating buttons to close and save form data -->
               </div>
               <div class="modal-footer">
@@ -54,3 +73,4 @@
       <button id="createIssueBtn" type="button" class="btn btn-primary mx-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
        New Issue
       </button>
+
