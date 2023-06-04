@@ -1,14 +1,13 @@
 const issueSchema = require('../Models/issueSchema');
 const projectSchema = require('../Models/projectsSchema');
 
+// creating a new Issue here
 module.exports.createIssue = async (request , response)=>{
-    
     try {
 
-        let lableArr = request.body.labels.filter((label)=>{
-            return label.toLowerCase();
-        });
-        console.log(lableArr);
+        // getting the entered labels
+        let lableArr = request.body.labels;
+
         // check whether the project exists or not
         const project = await projectSchema.findById(request.params.projectId);
 
@@ -17,13 +16,19 @@ module.exports.createIssue = async (request , response)=>{
         if(project)
         { 
             // creating the issue 
-            const issue = await issueSchema.create({
-                author: request.body.author.toLowerCase(),
-                description: request.body.description,
-                title: request.body.title,
-                labels: lableArr,
-                projectId:request.params.projectId
-            });
+                const issue = await issueSchema.create({
+
+                        author: request.body.author.toLowerCase(),
+
+                        description: request.body.description,
+
+                        title: request.body.title,
+
+                        labels: lableArr,
+
+                        projectId:request.params.projectId
+                });
+                
             
             // storing the issue in the specified project 
             project.issues.push(issue);
@@ -40,14 +45,8 @@ module.exports.createIssue = async (request , response)=>{
     
 }
 
-module.exports.resolveIssue = async (request , response)=>{
-    try {
-        // resolve issue here
-    } catch (error) {
-        console.log('error in resolving the issue',error);
-    }
-}
 
+// filter by Author function 
 module.exports.filterByAuthor = async (request , response)=>{
     try {
         // checking for ajax request
@@ -66,7 +65,6 @@ module.exports.filterByAuthor = async (request , response)=>{
 
                 newIssues = await issueSchema.find({ "projectId": request.body.projectId, 'author':author });
 
-                // .find( { tags: ["red", "blank"] } )
             }
           
        
@@ -81,12 +79,13 @@ module.exports.filterByAuthor = async (request , response)=>{
     }
 }
 
-
+// function to filter the content by labels (one can use multiple labels at a time)
 module.exports.filter = async (request , response)=>{
 
-    let lableArr = request.body.labels;
-        console.log(lableArr);
-        console.log(request.body.projectId)
+    let lableArr = [];
+
+    lableArr =JSON.parse(request.body.newLabels);
+
 
     let newIssues = [];
         const project = await projectSchema.findById(request.body.projectId);
@@ -97,10 +96,7 @@ module.exports.filter = async (request , response)=>{
         if(project){
 
             newIssues = await issueSchema
-            .find({ "projectId": request.body.projectId, "labels":{ $all: lableArr} });
-
-            console.log(newIssues)
-            // .find( { tags: ["red", "blank"] } )
+                                .find({ "projectId": request.body.projectId, "labels":{ $all: lableArr} });
         }
 
         return response.status(200).json(newIssues);

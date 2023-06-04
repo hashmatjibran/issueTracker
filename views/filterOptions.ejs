@@ -28,13 +28,13 @@
 
         <!-- code for filter by label -->
         
-        <div class="input-group mb-3 filterByLabel">
+        <div class="input-group mb-3 ">
           <span class="input-group-text" id="basic-addon3"><i class="fa-solid fa-magnifying-glass"></i></span>
           <!--  -->
-          <select id="filterByLabelInput"  class="form-control" multiple="multiple">
-            <option selected="selected">orange</option>
+          <select id="filterByLabelInput" style="width:70%" class="form-control" multiple="multiple">
+            
             <% for(label of labels){%>
-              <option value="<%=label%>"><%=label%></option>
+              <option  value="<%=label%>"><%=label%></option>
               <%}%>
             
           </select>

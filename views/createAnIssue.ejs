@@ -34,26 +34,18 @@
       
 
                 <!-- selecting labels for issues -->
-                
-                 
-                 
+              
                   <div class="input-group mb-3 filterByLabel">
                      <span class="input-group-text" id="basic-addon3">Labels</span>
                   <!--  -->
-                  <select class="js-select2 form-control " style="width:80%" multiple="multiple">
-                      <option selected="selected">orange</option>
+                  <select class="js-select2 form-control" name="labels" style="width:80%" multiple="multiple" required>
+                      
                       <% for(label of labels){%>
                         <option value="<%=label%>"><%=label%></option>
                         <%}%>
                       
                     </select>
                   </div>
-
-                  
-                  
-                  <!-- <input type="text" class="form-control" id="basic-url" name="labels" aria-describedby="basic-addon3" multiple required placeholder="Enter labels separated by , eg open,resolved"> -->
-                
-    
               
                 <!-- creating buttons to close and save form data -->
               </div>

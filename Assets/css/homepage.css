@@ -1,8 +1,23 @@
+/* body props */
+body {
+    background-image: url("/pics/background.jpeg");
+    background-repeat: repeat;
+    background-size: 30px 30px;
+  }
+
+
+
+  .projectDetails{
+    width: 50%;
+    margin: auto;
+    background: #f0ffffbf;
+  }
 
 /* css for the name of project which is displayed in the projects.ejs file */
 .projectName{
 text-transform: capitalize;
 padding: 1%;
+color: whitesmoke;
 }
 
 /* css for list items i.e li tags in list */
@@ -31,3 +46,22 @@ padding: 1%;
     position: absolute;
 }
 
+
+
+/* creating an animation */
+
+#animation{
+        border-radius: 50%;
+        animation-name: example;
+        animation-duration: 4s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
+      
+      @keyframes example {
+        0%   {rotate: 0deg;}
+        25%  {rotate: 90deg;}
+        50%  {rotate: 180deg;}
+        75%  {rotate: 270deg;}
+        100% {rotate: 360deg;}
+      }
