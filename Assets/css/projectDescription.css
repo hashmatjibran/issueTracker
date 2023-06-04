@@ -7,13 +7,10 @@
     border-radius: 6px;
     display: flex;
     align-items: baseline;
+    background: #f0ffffb0;
   }
-  .searchByTitle{
-    width: 35%;
-  }
-
-  .filterByLabel{
-    width:40%;
+  .searchByTitle {
+    width: 100%;
   }
 
   /* css for create issue btn i.e New Issue */
@@ -31,9 +28,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background: #f0ffffb0;
   }
-  .searchByTitle , .filterByLabel{
+  .searchByTitle {
     width: 100%;
+   
   }
 
   #createIssueBtn{
@@ -43,10 +42,6 @@
   }
   
 }
-
-
-
-
 
 
 /* css for showing the project details like capitalizing the data */
@@ -59,16 +54,13 @@
 
 
 /* css for the div which will be showing issues */
-
 .issuesDiv{
     width: 80%;
     margin: auto;
     border: 1px solid black;
     text-transform: capitalize;
+    background: #f0ffff99;
 }
-
-
-
 
 /* css for search bar i.e search issues by title */
 #myInput{
@@ -108,12 +100,9 @@
   }
 
   /* css for filter by lable i.e where we will be filtering the data by label*/
-
-  #filterByLabelInput{
-    width: 70%;
-    font-size: 16px; /* Increase font-size */
-    padding: 12px 20px 12px 40px; /* Add some padding */
-    border: 1px solid #ddd; /* Add a grey border */
+  
+  .filterByLabel{
+     position: relative;
+    display: flex;
+    
   }
-
- 

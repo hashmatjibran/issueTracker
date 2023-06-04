@@ -5,8 +5,7 @@ const issuesController = require('../controller/issueController');
 // route for create issue here
 router.post('/createIssue/:projectId',issuesController.createIssue);
 
-// route for resolve issue here
-router.post('/resolveIssue/:issueId',issuesController.resolveIssue);
+
 
 // route for filter by author
 router.post('/filterByAuthor',issuesController.filterByAuthor);

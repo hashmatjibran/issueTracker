@@ -28,9 +28,18 @@
 
         <!-- code for filter by label -->
         
-        <div class="input-group mb-3 filterByLabel">
+        <div class="input-group mb-3 ">
           <span class="input-group-text" id="basic-addon3"><i class="fa-solid fa-magnifying-glass"></i></span>
-          <input type="text" id="filterByLabelInput" onkeyup="filterByLabelFunction()" multiple placeholder="Separate multiple labels by a , eg open,unresolved">
+          <!--  -->
+          <select id="filterByLabelInput" style="width:70%" class="form-control" multiple="multiple">
+            
+            <% for(label of labels){%>
+              <option  value="<%=label%>"><%=label%></option>
+              <%}%>
+            
+          </select>
+          <!--  -->
+          <!-- <input type="text" id="filterByLabelInput" onkeyup="filterByLabelFunction()" multiple placeholder="Separate multiple labels by a , eg open,unresolved"> -->
           <button onclick="filterByLabel(event)" data-projectId="<%=project._id%>" class="btn btn-success">Apply</button>
         </div>
 

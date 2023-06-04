@@ -1,17 +1,35 @@
+$(document).ready(function () {
+  // javascript for select2 i.e select boxes using select2
+
+$("#filterByLabelInput").select2({
+  tags: true,
+  tokenSeparators: [',', ' '],
+  width:'resolve',
+  allowClear: true,
+  placeholder : "Enter lable/labels to filter issues"
+})
+
+$(".js-select2").select2({
+  placeholder : "Assign a lable",
+  tokenSeparators: [',', ' '],
+  tags: true, // создает новые опции на лету
+  allowClear: true,
+  dropdownParent: $("#staticBackdrop"),
+  width:'resolve'
+});
+});
+
+
+ 
+//  created a function that will close the model after user submits the data
  addProject = ()=>{
-    console.log('btn clicked');
-
-
-    // closing the modal
+    // closing the modal after taking userInput
     let closebtn = document.getElementById('closeBtn');
     closebtn.click();
 }
 
-resolveBtn =()=>{
-console.log('resolve the issue')
-}
 
-
+// this function is used to filter all the data displayed via title (i.e filter by title function )
 function filterFunction() {
     // Declare variables
     var input, filter, table, tr, td, i, txtValue;
@@ -35,6 +53,7 @@ function filterFunction() {
   }
 
 
+  // creating a function to filter Issues by Author
   function filterByAuthor (e){
 
     e.preventDefault();
@@ -53,8 +72,7 @@ function filterFunction() {
             projectId
         },
         success: function (response) {
-
-            console.log(response);
+          // populating the data using dom manipulation
             let tableData = $('#myTable');
             tableData.empty();
             let data =
@@ -86,8 +104,8 @@ function filterFunction() {
     
   }
 
-//   sorting the table in assending and descending order
 
+//   sorting the table in assending and descending order
 function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById("myTable");
@@ -144,17 +162,22 @@ function sortTable(n) {
   }
 
 
+
+  // filter the issues on the basis of labels
   function filterByLabel(e) { 
-    const labels = $('#filterByLabelInput').val();
+    const newLabels  = $('#filterByLabelInput').select2('val');
+
     const projectId = e.target.dataset.projectid;
 
     $.ajax({
       type: "post",
       url: "/issues/filterbylabels",
       data: {
-        projectId,
-        labels
+        'projectId':projectId,
+        'newLabels':JSON.stringify(newLabels)
       },
+      
+      dataType: 'JSON',
       success: function (response) {
         let tableData = $('#myTable');
         tableData.empty();
@@ -178,3 +201,7 @@ function sortTable(n) {
     });
 
    }
+
+
+
+
